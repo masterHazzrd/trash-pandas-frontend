@@ -3,6 +3,7 @@ import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import Footer from './components/Footer';
 import axios from 'axios';
+import './App.css';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -29,32 +30,22 @@ function App() {
     }
   };
 
-  const deleteTodo = async (id) => {
+  const deleteSelected = async (selectedIds) => {
     try {
-      await axios.delete(`http://localhost:5000/tasks/${id}`);
-      setTodos(todos.filter((todo) => todo._id !== id));
+      await Promise.all(
+        selectedIds.map((id) => axios.delete(`http://localhost:5000/tasks/${id}`))
+      );
+      setTodos(todos.filter((todo) => !selectedIds.includes(todo._id)));
     } catch (error) {
-      console.error('Error deleting task:', error);
-    }
-  };
-
-  const toggleComplete = async (id) => {
-    try {
-      const todo = todos.find((t) => t._id === id);
-      const updatedTodo = { ...todo, completed: !todo.completed };
-      await axios.put(`http://localhost:5000/tasks/${id}`, updatedTodo);
-      setTodos(todos.map((t) => (t._id === id ? updatedTodo : t)));
-    } catch (error) {
-      console.error('Error updating task:', error);
+      console.error('Error deleting tasks:', error);
     }
   };
 
   return (
-    <div>
-      <h1>Trasha Pandas</h1>
-      <h2>Todo Garbage List</h2>
+    <div className="app-container">
+      <h1>To-Do App</h1>
       <TodoForm addTodo={addTodo} />
-      <TodoList todos={todos} deleteTodo={deleteTodo} toggleComplete={toggleComplete} />
+      <TodoList todos={todos} deleteSelected={deleteSelected} />
       <Footer />
     </div>
   );
