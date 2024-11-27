@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles/footer.css';
 
 function Footer() {
   const lastUpdated = new Date().toLocaleDateString();

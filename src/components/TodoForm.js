@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './styles/calendar.css';
 
 function TodoForm({ addTodo }) {
   const [task, setTask] = useState('');
@@ -14,7 +15,7 @@ function TodoForm({ addTodo }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="todo-form">
       <input
         type="text"
         placeholder="Add a task"

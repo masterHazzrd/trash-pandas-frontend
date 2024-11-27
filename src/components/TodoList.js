@@ -1,17 +1,7 @@
-import React, { useState } from 'react';
-import './TodoList.css'; // Updated CSS file
+import React from 'react';
+import './styles/calendar.css';
 
-function TodoList({ todos, deleteSelected }) {
-  const [selectedTasks, setSelectedTasks] = useState([]);
-
-  const toggleSelect = (id) => {
-    setSelectedTasks((prevSelected) =>
-      prevSelected.includes(id)
-        ? prevSelected.filter((taskId) => taskId !== id)
-        : [...prevSelected, id]
-    );
-  };
-
+function TodoList({ todos, deleteTodo, toggleComplete }) {
   const categories = [
     { name: 'short-term', color: '#ff6700' },
     { name: 'mid-term', color: '#ffce00' },
@@ -19,36 +9,29 @@ function TodoList({ todos, deleteSelected }) {
   ];
 
   return (
-    <div className="todo-list">
+    <div className="calendar">
       {categories.map((category) => (
-        <div key={category.name} className="category">
+        <div key={category.name} className="category-column">
           <h2 style={{ backgroundColor: category.color }}>
             {category.name.replace('-', ' ')} Goals
           </h2>
-          <div className="task-grid">
+          <ul>
             {todos
               .filter((todo) => todo.category === category.name)
               .map((todo) => (
-                <div
-                  key={todo._id}
-                  className="task-card"
-                  style={{
-                    backgroundColor: `${category.color}30`,
-                    borderLeft: `5px solid ${category.color}`,
-                  }}
-                >
+                <li key={todo._id} className="task-item">
                   <input
                     type="checkbox"
-                    checked={selectedTasks.includes(todo._id)}
-                    onChange={() => toggleSelect(todo._id)}
+                    checked={todo.completed}
+                    onChange={() => toggleComplete(todo._id)}
                   />
-                  <p>{todo.task}</p>
-                </div>
+                  {todo.task}
+                  <button onClick={() => deleteTodo(todo._id)}>Delete</button>
+                </li>
               ))}
-          </div>
+          </ul>
         </div>
       ))}
-      <button onClick={() => deleteSelected(selectedTasks)}>Delete Selected</button>
     </div>
   );
 }

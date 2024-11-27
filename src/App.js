@@ -2,50 +2,46 @@ import React, { useState, useEffect } from 'react';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import Footer from './components/Footer';
-import axios from 'axios';
-import './App.css';
+import './index.css';
 
 function App() {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
+    // Simulating fetching tasks from a backend
     const fetchTodos = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/tasks');
-        setTodos(response.data);
-      } catch (error) {
-        console.error('Error fetching tasks:', error);
-      }
+      const mockTodos = [
+        { _id: '1', task: 'Buy groceries', category: 'short-term', completed: false },
+        { _id: '2', task: 'Plan vacation', category: 'mid-term', completed: false },
+        { _id: '3', task: 'Learn React', category: 'long-term', completed: false },
+      ];
+      setTodos(mockTodos);
     };
 
     fetchTodos();
   }, []);
 
-  const addTodo = async (newTask) => {
-    try {
-      const response = await axios.post('http://localhost:5000/tasks', newTask);
-      setTodos([...todos, response.data]);
-    } catch (error) {
-      console.error('Error adding task:', error);
-    }
+  const addTodo = (newTask) => {
+    setTodos([...todos, { _id: Date.now().toString(), ...newTask }]);
   };
 
-  const deleteSelected = async (selectedIds) => {
-    try {
-      await Promise.all(
-        selectedIds.map((id) => axios.delete(`http://localhost:5000/tasks/${id}`))
-      );
-      setTodos(todos.filter((todo) => !selectedIds.includes(todo._id)));
-    } catch (error) {
-      console.error('Error deleting tasks:', error);
-    }
+  const deleteTodo = (id) => {
+    setTodos(todos.filter((todo) => todo._id !== id));
+  };
+
+  const toggleComplete = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo._id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
   };
 
   return (
-    <div className="app-container">
+    <div>
       <h1>To-Do App</h1>
       <TodoForm addTodo={addTodo} />
-      <TodoList todos={todos} deleteSelected={deleteSelected} />
+      <TodoList todos={todos} deleteTodo={deleteTodo} toggleComplete={toggleComplete} />
       <Footer />
     </div>
   );
