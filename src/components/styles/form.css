@@ -1,0 +1,27 @@
+.todo-form {
+    margin-top: 160px; /* Adds 15px space between the header and form */
+    display: flex;
+    justify-content: center; /* Center-aligns the form */
+    gap: 10px; /* Adds spacing between input, select, and button */
+}
+
+.todo-form input,
+.todo-form select,
+.todo-form button {
+    top: 50px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.todo-form button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.todo-form button:hover {
+    background-color: #45a049;
+}

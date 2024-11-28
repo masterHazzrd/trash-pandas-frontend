@@ -1,7 +1,7 @@
 .calendar {
   display: flex;
   justify-content: space-around;
-  margin-top: 20px;
+  margin-top: 10px; /* Adjusts the space between categories */
 }
 
 .category-column {
@@ -11,39 +11,52 @@
 
 h2 {
   color: white;
-  padding: 10px;
+  padding: 5px;
   text-align: center;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Responsive grid with min task size */
+  gap: 10px; /* Space between task boxes */
 }
 
-.task-item {
-  margin: 5px 0;
-  padding: 10px;
+.task-box {
+  width: 100px; /* Task box width */
+  height: 150px; /* Task box height */
   border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Ensure content aligns vertically */
+  align-items: center;
+  position: relative; /* Enables absolute positioning for child elements */
 }
 
-button {
-  background-color: #e74c3c;
+.task-box input[type='checkbox'] {
+  position: absolute;
+  bottom: 5px; /* 5px from the bottom of the task box */
+  right: 5px; /* 5px from the right side of the task box */
+}
+
+.delete-button-container {
+  position: fixed; /* Positioned relative to the viewport */
+  bottom: 85px; /* 5px above the footer */
+  right: 5px; /* 5px from the right edge of the screen */
+  z-index: 1000; /* Ensure it stays visible above other elements */
+}
+
+.delete-button {
+  background-color: #0cac26;
   color: white;
   border: none;
-  padding: 5px;
+  padding: 10px 15px; /* Standard button size */
   border-radius: 5px;
   cursor: pointer;
 }
 
-button:hover {
+.delete-button:hover {
   background-color: #c0392b;
-}
-
-input[type="checkbox"] {
-  margin-right: 10px;
 }

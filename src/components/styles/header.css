@@ -1,27 +1,28 @@
 .app-header {
-  text-align: center;
-  margin: 10px auto; /* Reduced margin for a thinner appearance */
-  padding: 5px; /* Reduced padding for a thinner header */
-  background-color: #ff6700;
-  border-radius: 10px;
-  color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-align: center;  
+    color: white;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    background-color: #ff6700;
+    padding-bottom: 15px; /* Ensures header content ends cleanly */
 }
 
 .app-title {
-  font-size: 2rem; /* Smaller font size */
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    font-size: 1.5rem; /* Smaller font size */
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .app-subtitle {
-  font-size: 1.2rem; /* Smaller font size */
-  font-style: italic;
-  margin-top: -5px; /* Reduced spacing between title and subtitle */
+    font-size: 1.15rem; /* Smaller font size */
+    font-style: italic;
+    margin-top: -25px; /* Reduced spacing between title and subtitle */
 }
 
 .app-tagline {
-  font-size: 1rem; /* Smallest font for tagline */
-  color: #ffe4b5;
-  margin-top: -5px;
+    font-size: 1rem; /* Smallest font for tagline */
+    color: #ffe4b5;
+    margin-top: -25px;
 }

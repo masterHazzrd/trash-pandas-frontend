@@ -1,11 +1,11 @@
 import React from 'react';
 import './styles/calendar.css';
 
-function TodoList({ todos, deleteTodo, toggleComplete }) {
+function TodoList({ todos, deleteSelectedTasks, toggleSelect }) {
   const categories = [
-    { name: 'short-term', color: 'rgba(255, 103, 0, 0.3)' }, // 30% opacity
-    { name: 'mid-term', color: 'rgba(255, 206, 0, 0.3)' }, // 30% opacity
-    { name: 'long-term', color: 'rgba(86, 160, 211, 0.3)' }, // 30% opacity
+    { name: 'short-term', color: 'rgba(255, 103, 0, 0.3)' },
+    { name: 'mid-term', color: 'rgba(255, 206, 0, 0.3)' },
+    { name: 'long-term', color: 'rgba(86, 160, 211, 0.3)' },
   ];
 
   return (
@@ -15,27 +15,32 @@ function TodoList({ todos, deleteTodo, toggleComplete }) {
           <h2 style={{ backgroundColor: category.color.replace('0.3', '1') }}>
             {category.name.replace('-', ' ')} Goals
           </h2>
-          <ul>
+          <div className="task-grid">
             {todos
               .filter((todo) => todo.category === category.name)
               .map((todo) => (
-                <li
+                <div
                   key={todo._id}
-                  className="task-item"
+                  className="task-box"
                   style={{ backgroundColor: category.color }}
                 >
+                  <p className="task-text">{todo.task}</p>
                   <input
                     type="checkbox"
-                    checked={todo.completed}
-                    onChange={() => toggleComplete(todo._id)}
+                    className="task-checkbox"
+                    checked={todo.isSelected}
+                    onChange={() => toggleSelect(todo._id)}
                   />
-                  {todo.task}
-                  <button onClick={() => deleteTodo(todo._id)}>Delete</button>
-                </li>
+                </div>
               ))}
-          </ul>
+          </div>
         </div>
       ))}
+      <div className="delete-button-container">
+        <button onClick={deleteSelectedTasks} className="delete-button">
+          Delete Selected
+        </button>
+      </div>
     </div>
   );
 }
