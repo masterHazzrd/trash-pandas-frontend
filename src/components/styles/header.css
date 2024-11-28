@@ -6,7 +6,7 @@
     color: white;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
     background-color: #ff6700;
-    padding-bottom: 15px; /* Ensures header content ends cleanly */
+    padding-bottom: 5px; /* Ensures header content ends cleanly */
 }
 
 .app-title {
@@ -18,11 +18,11 @@
 .app-subtitle {
     font-size: 1.15rem; /* Smaller font size */
     font-style: italic;
-    margin-top: -25px; /* Reduced spacing between title and subtitle */
+    margin-top: -20px; /* Reduced spacing between title and subtitle */
 }
 
 .app-tagline {
     font-size: 1rem; /* Smallest font for tagline */
     color: #ffe4b5;
-    margin-top: -25px;
+    margin-top: -20px;
 }
